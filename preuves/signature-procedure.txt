@@ -1,0 +1,1 @@
+Signature GPG activee pour SlowlyTv/atelier-git-avance uniquement, puis Codespace redemarre. Verification du commit effectuee cote GitHub apres publication.
