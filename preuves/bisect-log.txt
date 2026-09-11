@@ -1,0 +1,10 @@
+# bad: [8bf72a425165a0704b3618dbea876f3c536dee53] docs(incident): noter evolution 8
+# good: [a52d99d94aeeb3315dcfc1dd06d164f6ec7a856a] fix(accueil): resoudre le conflit en combinant les deux messages
+git bisect start '8bf72a425165a0704b3618dbea876f3c536dee53' 'a52d99d94aeeb3315dcfc1dd06d164f6ec7a856a'
+# bad: [3172d66353035db0df87ed1ff31ee40577d525e3] refactor(calcul): modifier le calcul (regression volontaire)
+git bisect bad 3172d66353035db0df87ed1ff31ee40577d525e3
+# good: [1d721b442a11f70ade7a79e22d58cff1aaeec372] docs(incident): noter evolution 2
+git bisect good 1d721b442a11f70ade7a79e22d58cff1aaeec372
+# good: [f051f93ec6ed5230fc48d4828a8a0329e6a5cc61] docs(incident): noter evolution 3
+git bisect good f051f93ec6ed5230fc48d4828a8a0329e6a5cc61
+# first 'bad' commit: [3172d66353035db0df87ed1ff31ee40577d525e3] refactor(calcul): modifier le calcul (regression volontaire)

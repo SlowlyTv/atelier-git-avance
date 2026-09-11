@@ -1,0 +1,50 @@
+running 'python' '-B' '-m' 'unittest' 'discover' '-s' 'tests'
+FF
+======================================================================
+FAIL: test_negative (test_calcul.TestAddition.test_negative)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspaces/atelier-git-avance/tests/test_calcul.py", line 9, in test_negative
+    self.assertEqual(addition(-2, 3), 1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: -5 != 1
+
+======================================================================
+FAIL: test_positive (test_calcul.TestAddition.test_positive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspaces/atelier-git-avance/tests/test_calcul.py", line 6, in test_positive
+    self.assertEqual(addition(2, 3), 5)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: -1 != 5
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=2)
+Bisecting: 1 revision left to test after this (roughly 1 step)
+[1d721b442a11f70ade7a79e22d58cff1aaeec372] docs(incident): noter evolution 2
+running 'python' '-B' '-m' 'unittest' 'discover' '-s' 'tests'
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+Bisecting: 0 revisions left to test after this (roughly 0 steps)
+[f051f93ec6ed5230fc48d4828a8a0329e6a5cc61] docs(incident): noter evolution 3
+running 'python' '-B' '-m' 'unittest' 'discover' '-s' 'tests'
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
+3172d66353035db0df87ed1ff31ee40577d525e3 is the first 'bad' commit
+commit 3172d66353035db0df87ed1ff31ee40577d525e3
+Author: SlowlyTv <116349579+SlowlyTv@users.noreply.github.com>
+Date:   Fri Sep 11 11:56:59 2026 +0000
+
+    refactor(calcul): modifier le calcul (regression volontaire)
+
+ src/calcul.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+bisect found first 'bad' commit

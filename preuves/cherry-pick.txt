@@ -1,0 +1,3 @@
+Commit source : 917a819fd9401acf2cb2eb5dde046071c0759d7d
+Commit cherry-picke : 46350ccb40ba6adb3625fdaa06dcb2ee2430a841
+Verification : SHA differents, src/calcul.py identique, travail-en-cours absent de la release.

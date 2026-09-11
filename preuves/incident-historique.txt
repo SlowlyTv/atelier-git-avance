@@ -1,0 +1,8 @@
+7de61e61a65c16e2c535645bd1aab6e1ba5b2713 docs(incident): noter evolution 1
+1d721b442a11f70ade7a79e22d58cff1aaeec372 docs(incident): noter evolution 2
+f051f93ec6ed5230fc48d4828a8a0329e6a5cc61 docs(incident): noter evolution 3
+3172d66353035db0df87ed1ff31ee40577d525e3 refactor(calcul): modifier le calcul (regression volontaire)
+bcb4d5732d76ff4233b6f658eb154af7c05016a6 docs(incident): noter evolution 5
+8019b7902ae78ea84f7155d340ca56853fdcd382 docs(incident): noter evolution 6
+de06e5c2cc2deb1ac49021fa931a8833c2891038 docs(incident): noter evolution 7
+8bf72a425165a0704b3618dbea876f3c536dee53 docs(incident): noter evolution 8
