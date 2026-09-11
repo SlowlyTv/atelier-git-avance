@@ -1,0 +1,1 @@
+Deux branches issues de 5bc304f080c69546fed59d06261bb35497c14548 ont modifie la meme ligne de accueil.txt. La seconde fusion sur main a produit un conflit de contenu ; resolution manuelle combinant Git avance et collaboratif. Simulation technique par un seul auteur, pas une preuve de deux participants.

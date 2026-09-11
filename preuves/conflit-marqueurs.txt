@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+Bienvenue dans notre atelier Git avance.
+=======
+Bienvenue dans notre atelier collaboratif.
+>>>>>>> exercice/conflit-b
