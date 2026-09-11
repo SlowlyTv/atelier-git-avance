@@ -1,0 +1,10 @@
+test_negative (test_calcul.TestAddition.test_negative) ... ok
+test_positive (test_calcul.TestAddition.test_positive) ... ok
+test_clean_text (test_secrets.TestSecrets.test_clean_text) ... ok
+test_fake_password (test_secrets.TestSecrets.test_fake_password) ... ok
+test_staged_content_not_working_copy (test_secrets.TestSecrets.test_staged_content_not_working_copy) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.177s
+
+OK

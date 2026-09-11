@@ -1,3 +1,11 @@
-# Ce fichier doit exister sur la branche cible de la PR pour y être pris en compte.
-# Ajouter un relecteur ayant accès en écriture lorsqu'il sera disponible.
+# Proprietaires par zone. Ajouter le formateur apres confirmation de son pseudo
+# et attribution de droits en ecriture. Un auteur ne peut pas approuver sa PR.
 * @SlowlyTv
+/src/ @SlowlyTv
+/tests/ @SlowlyTv
+/scripts/ @SlowlyTv
+/.githooks/ @SlowlyTv
+/docs/ @SlowlyTv
+/preuves/ @SlowlyTv
+/README.md @SlowlyTv
+/.github/ @SlowlyTv
