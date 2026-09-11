@@ -1,0 +1,5 @@
+252c5a4 feat(calcul): ajouter une addition
+723bcdf docs(calcul): documenter additoin
+699492e wip
+b48bd91 test a reformuler
+6a41f4f wip tests
