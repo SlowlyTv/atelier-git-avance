@@ -1,36 +1,23 @@
-# Suivi de l'atelier
+# Bilan de la séance 1
 
-Ce document distingue la préparation des exercices effectivement réalisés. Ne cocher une étape qu'après vérification et ajout des preuves.
+## Réalisé et prouvé
 
-- [x] Dépôt GitHub créé.
-- [x] Stratégie de branches rédigée dans `docs/STRATEGIE.md`.
-- [x] Fichier `.github/CODEOWNERS` préparé sur la branche de documentation.
-- [ ] Préparation fusionnée dans `main` pour rendre CODEOWNERS applicable aux PR suivantes.
-- [ ] Rebase interactif réalisé : conserver les historiques avant/après et les actions pick/squash/reword.
-- [ ] Conflit provoqué puis résolu : conserver les noms de branches, le fichier concerné et le commit de résolution.
-- [ ] Cherry-pick réalisé : noter le commit source et le nouveau commit.
-- [ ] Bisect réalisé : conserver le journal `git bisect log` et le commit fautif identifié par un test.
-- [ ] Cycle PR → revue indépendante → merge : noter le lien de PR et l'identité du relecteur.
-- [ ] Protection avancée de `main` active : conserver la configuration et un exemple de blocage.
-- [ ] Hook anti-secret installé : vérifier le refus d'un faux secret puis l'acceptation d'un fichier sain. Ne jamais utiliser un véritable secret pour cet exercice.
-- [ ] Commit signé : noter le SHA et vérifier la signature. Ne pas confondre signature et ligne Signed-off-by.
-- [ ] Tag SemVer `v1.0.0` créé et publié après validation.
+- Dépôt publié ; stratégie trunk-based et règles de fusion documentées dans le README ; structure et .gitignore présents.
+- Rebase interactif : cinq commits brouillons ramenés à deux commits de code par pick, squash, fixup et reword. Un commit distinct ajoute ensuite les preuves. Voir preuves/rebase-avant.txt, rebase-actions.txt et rebase-apres.txt. La branche originale a été publiée après le nettoyage.
+- Conflit de contenu : deux branches modifient la même ligne de accueil.txt ; première fusion sur main puis seconde fusion en conflit. Résolution combinant les idées, sans marqueurs résiduels dans accueil.txt. Les marqueurs d'origine sont conservés volontairement dans preuves/conflit-marqueurs.txt.
+- Bisect : régression identifiée parmi huit commits par un test automatisé reproductible. Voir preuves/bisect-log.txt et bisect-execution.txt.
+- Cherry-pick : correctif reporté seul depuis fix/addition-hotfix vers release/0.1. SHA différents, fichier corrigé identique, travail annexe exclu. Voir preuves/cherry-pick.txt.
+- Hook local activé ; tentative réelle de commit d'un faux secret refusée ; HEAD inchangé après le refus. Voir preuves/hook-rejet.txt et tests-securite.txt.
+- CODEOWNERS réparti par chemins existants ; toutes les zones sont pour l'instant attribuées à SlowlyTv.
 
-## Prochaine étape : un terminal Git
+## À finaliser ou à vérifier avec le formateur
 
-Utiliser Git installé sur le poste ou ouvrir le dépôt dans GitHub Codespaces via Code → Codespaces. Dans un terminal Git local, cloner le dépôt ; Codespaces le clone automatiquement.
+- Revue indépendante avec commentaire de fond par le propriétaire désigné, puis fusion. Les PR de préparation ne satisfont pas cette exigence.
+- Contributions de plusieurs personnes réelles. Les deux branches du conflit ont été manipulées par le même compte ; l'exercice technique est réalisé, le travail de groupe ne l'est pas.
+- Signature : vérifier le résultat le plus récent dans preuves/signature.json ; un résultat verified=false ne valide pas l'étape.
+- Protections main et tags : voir preuves/protections/ lorsqu'elles auront été appliquées et testées.
+- Tag SemVer : version initiale de développement v0.1.0 prévue ; v1.0.0 sera réservée au livrable final validé.
 
-```sh
-git clone https://github.com/SlowlyTv/atelier-git-avance.git
-cd atelier-git-avance
-```
+## Écarts historiques conservés
 
-Dans le dossier du dépôt (y compris avec Codespaces), vérifier :
-
-```sh
-git status
-git branch -a
-git --version
-```
-
-Les exercices seront réalisés et documentés à partir de cet environnement. Pour le travail en solo, demander au formateur comment valider la revue indépendante ; ne pas cocher cette exigence à partir d'une auto-revue.
+Le dépôt a été initialisé sur GitHub, pas par git remote add depuis un dépôt local. Le premier commit ne contenait pas de .gitignore. Initial commit et le message de merge de la PR #1 ne suivent pas Conventional Commits. Ils sont conservés plutôt que de réécrire main déjà partagé. Les messages brouillons sur les branches témoins servent de preuves du rebase et de la régression volontaire.

@@ -1,23 +1,12 @@
-# Stratégie de branches
+# Stratégie : trunk-based
 
-- `main` : version stable et livrable du projet.
-- `docs/*` : documentation.
-- `feature/*` : fonctionnalités isolées.
-- `fix/*` : corrections.
-- `exercice/*` : branches conservées comme preuves des manipulations Git.
+La règle de référence est également inscrite dans README.md.
 
-Chaque changement part de `main` à jour. Les commits sont courts et décrivent une intention (`docs:`, `feat:`, `fix:`, `test:`). Avant publication, un rebase interactif permet de regrouper les commits de brouillon. Ne pas réécrire l'historique partagé de `main`.
+- main : version stable ; branches courtes feature/*, fix/*, docs/* et chore/*.
+- exercice/* : traces pédagogiques conservées ; release/0.1 : cible du report du correctif dans le scénario d'incident.
+- Nettoyer une branche personnelle non partagée par rebase interactif avant sa PR.
+- PR avec quoi et pourquoi, revue de fond par le CODEOWNER, discussions résolues, puis Squash and merge avec un message type(scope): description.
+- Après activation des protections : PR obligatoire, approbation CODEOWNER, historique linéaire pour les nouveaux changements, aucun contournement administrateur, pas de suppression ni de push forcé sur main.
+- Tags v* : empêcher déplacement et suppression. Première version de développement v0.1.0 ; v1.0.0 seulement après validation du livrable.
 
-Les changements passent par une pull request. Une autre personne disposant des droits nécessaires effectue la revue. Après validation des contrôles et résolution des discussions, la branche peut être fusionnée. Les branches d'exercice restent disponibles pour l'évaluation.
-
-## Protection cible (à configurer et vérifier)
-
-Sur `main` : imposer une pull request, la résolution des discussions et un contrôle automatisé réussi ; bloquer les suppressions et les push forcés. Exiger une approbation CODEOWNER une fois un relecteur disponible.
-
-## Versions
-
-Utiliser des tags `vMAJEUR.MINEUR.CORRECTIF` : correctif compatible = CORRECTIF, ajout compatible = MINEUR, rupture de compatibilité = MAJEUR. Le premier livrable validé recevra le tag annoté `v1.0.0`.
-
-## Situation de départ
-
-Atelier réalisé seul. La revue par un autre compte reste à organiser : une auto-revue ne sera pas présentée comme une approbation indépendante.
+Les merges pédagogiques antérieurs aux protections restent dans l'historique. L'historique partagé n'est pas réécrit pour masquer ces exercices.
