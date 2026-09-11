@@ -13,6 +13,6 @@ Messages : type(scope): description (feat, fix, docs, test, chore). SemVer : MAJ
 
 ## Transparence et suivi
 
-Atelier realise par SlowlyTv avec assistance de Codex. Aucune contribution ne sera attribuee a un coequipier fictif. Une revue independante et des contributions reelles de plusieurs membres restent a organiser avec le formateur. La PR #1 est une preparation fusionnee sans revue independante. Le depot a ete cree sur GitHub puis clone dans Codespaces ; le premier commit contenait seulement le README et le .gitignore a ete ajoute ensuite.
+Atelier realise par SlowlyTv. Aucune contribution ne sera attribuee a un coequipier fictif. Une revue independante et des contributions reelles de plusieurs membres restent a organiser avec le formateur. La PR #1 est une preparation fusionnee sans revue independante. Le depot a ete cree sur GitHub puis clone dans Codespaces ; le premier commit contenait seulement le README et le .gitignore a ete ajoute ensuite.
 
 Les preuves seront conservees dans preuves/ ; la strategie detaillee figure dans docs/STRATEGIE.md.
