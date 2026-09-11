@@ -24,6 +24,4 @@ Le bilan détaillé est dans [docs/ATELIER.md](docs/ATELIER.md). Les journaux av
 Pour exécuter les tests : python3 -m unittest discover -s tests -v.
 Pour activer le hook après clonage : git config core.hooksPath .githooks.
 
-Les étapes collaboratives nécessitent un vrai second participant. Le formateur peut assurer la revue CODEOWNER, comme prévu dans le PDF. Ajouter son compte avec les droits nécessaires, lui attribuer les zones concernées dans CODEOWNERS sur main, puis ouvrir une PR touchant ces zones. Son commentaire doit expliquer un point concret du diff avant son approbation.
-
 Version de développement prévue : v0.1.0, pour une première fonctionnalité testée dont le livrable pédagogique reste en cours de validation. Le passage à v1.0.0 attendra la validation complète.
