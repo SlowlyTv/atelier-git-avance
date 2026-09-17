@@ -1,5 +1,12 @@
 # atelier-git-avance
+
+[![CI](https://github.com/SlowlyTv/atelier-git-avance/actions/workflows/ci.yml/badge.svg)](https://github.com/SlowlyTv/atelier-git-avance/actions/workflows/ci.yml)
+
 Atelier Git avancé : branches, rebase, conflits, pull requests et sécurité.
+
+## Intégration continue
+
+Le workflow CI se déclenche sur chaque pull request et sur les push vers `main`. Il vérifie d'abord le style avec flake8, puis exécute les tests pytest sur Python 3.10, 3.11 et 3.12. Les dépendances pip sont mises en cache et un rapport de couverture HTML est conservé comme artefact pour chaque version de Python.
 
 ## Strategie : trunk-based
 
