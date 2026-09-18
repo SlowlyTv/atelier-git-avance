@@ -32,3 +32,28 @@ Pour exécuter les tests : python3 -m unittest discover -s tests -v.
 Pour activer le hook après clonage : git config core.hooksPath .githooks.
 
 Version de développement prévue : v0.1.0, pour une première fonctionnalité testée dont le livrable pédagogique reste en cours de validation. Le passage à v1.0.0 attendra la validation complète.
+
+## Docker - comparaison des images
+
+Les deux images ont été reconstruites sans cache le 18 septembre 2026 avant la mesure.
+
+| Variante | Dockerfile | Image de base | Serveur | Taille |
+| --- | --- | --- | --- | ---: |
+| Naive | `starter-app/Dockerfile.naive` | `python:3.12` | Flask | **1,63 Go** |
+| Multi-stage | `starter-app/Dockerfile` | `python:3.12-slim` | Gunicorn | **215 Mo** |
+
+Le build multi-stage réduit la taille de **87,5 %**. Le stage `builder` crée le virtualenv et installe les dépendances. Le stage final récupère uniquement ce virtualenv et `app.py` : les outils de build et les caches ne sont pas conservés.
+
+```bash
+docker build --pull --no-cache -f starter-app/Dockerfile.naive -t atelier-git-avance:naive-mesure starter-app
+docker build --pull --no-cache -t atelier-git-avance:multistage-mesure starter-app
+docker images atelier-git-avance
+```
+
+Pour tester depuis un Codespace :
+
+```bash
+docker run --rm -p 8082:5000 atelier-git-avance:multistage-mesure
+```
+
+Le `localhost` appartient à la machine distante du Codespace. Pour ouvrir le service sur votre ordinateur, utilisez **Ports**, repérez le port `8082`, puis choisissez **Ouvrir dans le navigateur**.

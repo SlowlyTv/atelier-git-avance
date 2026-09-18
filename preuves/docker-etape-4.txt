@@ -1,0 +1,12 @@
+Seance 3 - etape 4
+Images reconstruites le 18 septembre 2026 avec --pull --no-cache.
+
+atelier-git-avance:multistage-mesure 215MB
+atelier-git-avance:naive-mesure 1.63GB
+Reduction: 87.5%
+
+Health depuis le Codespace:
+{"status":"ok"}
+
+URL transferee:
+https://zany-halibut-qjwgvr9v4ggcx6p4-8082.app.github.dev/
