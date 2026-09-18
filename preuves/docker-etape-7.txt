@@ -1,0 +1,19 @@
+Atelier 3 - etape 7 : publication dans GitHub Container Registry
+Date : 2026-09-18
+
+Registre : ghcr.io/slowlytv/atelier-git-avance
+Tags publies :
+- v1.0.0
+- latest
+
+Workflow GitHub Actions :
+https://github.com/SlowlyTv/atelier-git-avance/actions/runs/35356531102
+Resultat : success
+
+Verification apres suppression des etiquettes locales :
+docker pull ghcr.io/slowlytv/atelier-git-avance:v1.0.0
+Digest : sha256:dc207775c70f2ccea8082bab19437ea5c1a055a0bd511ea09ddeed1c392fef41
+Utilisateur de l'image : app
+Healthcheck : /health avec Python urllib
+
+Verification publique : le pull de latest avec une configuration Docker anonyme a reussi.
