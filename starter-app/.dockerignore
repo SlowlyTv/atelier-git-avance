@@ -1,5 +1,6 @@
 *
 !app.py
 !requirements.txt
+!requirements-runtime.txt
 !Dockerfile
 !Dockerfile.naive

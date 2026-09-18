@@ -1,0 +1,42 @@
+Seance 3 - etape 3
+
+Image naive:
+atelier-git-avance:naive 1.63GB
+Image multi-stage:
+atelier-git-avance:multistage 215MB
+Reduction: 87.5%
+
+Health:
+{"status":"ok"}
+
+Utilisateur:
+app
+uid=10001(app) gid=10001(app) groups=10001(app)
+
+Serveur:
+gunicorn (version 23.0.0)
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+10001               3105                3079                2                   12:21               ?                   00:00:00            /opt/venv/bin/python /opt/venv/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
+10001               3158                3105                0                   12:21               ?                   00:00:00            /opt/venv/bin/python /opt/venv/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
+10001               3159                3105                0                   12:21               ?                   00:00:00            /opt/venv/bin/python /opt/venv/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
+
+Couches finales:
+0B CMD ["gunicorn" "--bind" "0.0.0.0:5000" "--w…
+0B EXPOSE [5000/tcp]
+0B USER app
+12.3kB COPY --chown=app:app app.py . # buildkit
+21.1MB COPY /opt/venv /opt/venv # buildkit
+8.19kB WORKDIR /app
+69.6kB RUN /bin/sh -c groupadd --gid 10001 app && u…
+0B ENV PATH=/opt/venv/bin:/usr/local/bin:/usr/l…
+0B ENV VIRTUAL_ENV=/opt/venv
+0B CMD ["python3"]
+16.4kB RUN /bin/sh -c set -eux;  for src in idle3 p…
+41.4MB RUN /bin/sh -c set -eux;   savedAptMark="$(a…
+0B ENV PYTHON_SHA256=5c8462af5790baf43a321a1559…
+0B ENV PYTHON_VERSION=3.12.14
+0B ENV GPG_KEY=7169605F62C751356D054A26A821E680…
+13.2MB RUN /bin/sh -c set -eux;  apt-get update;  a…
+0B ENV LANG=C.UTF-8
+0B ENV PATH=/usr/local/bin:/usr/local/sbin:/usr…
+87.5MB # debian.sh --arch 'amd64' out/ 'trixie' '@1…
