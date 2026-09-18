@@ -57,3 +57,50 @@ docker run --rm -p 8082:5000 atelier-git-avance:multistage-mesure
 ```
 
 Le `localhost` appartient à la machine distante du Codespace. Pour ouvrir le service sur votre ordinateur, utilisez **Ports**, repérez le port `8082`, puis choisissez **Ouvrir dans le navigateur**.
+
+
+## Exécuter la pile Docker Compose
+
+La pile comprend l'application Flask et Redis 7. Redis est joint avec le nom de service `redis`, sur un réseau Docker dédié. Le volume nommé `redis-data` conserve le compteur de visites.
+
+```bash
+docker build -t atelier-git-avance:local starter-app
+docker compose -f starter-app/docker-compose.yml config
+docker compose -f starter-app/docker-compose.yml up -d --build
+docker compose -f starter-app/docker-compose.yml ps
+```
+
+Points d'accès :
+
+- `/health` vérifie l'état du service web ;
+- `/status` renvoie la version de l'application ;
+- `/visits` incrémente un compteur persistant dans Redis.
+
+Dans GitHub Codespaces, ouvrez l'onglet **Ports** puis le port **8080** pour accéder à l'application depuis votre ordinateur. Le `localhost` du Codespace appartient à la machine distante.
+
+Pour arrêter la pile :
+
+```bash
+docker compose -f starter-app/docker-compose.yml down
+```
+
+## Image publiée
+
+L'image est publiée dans GitHub Container Registry : [ghcr.io/slowlytv/atelier-git-avance](https://github.com/users/SlowlyTv/packages/container/package/atelier-git-avance).
+
+```bash
+docker pull ghcr.io/slowlytv/atelier-git-avance:v1.0.0
+docker pull ghcr.io/slowlytv/atelier-git-avance:latest
+docker run --rm -p 8080:5000 ghcr.io/slowlytv/atelier-git-avance:v1.0.0
+```
+
+## Vérification finale de l'atelier 3
+
+- [x] Dockerfile naïf conservé pour la comparaison.
+- [x] Image multi-stage légère et utilisateur non-root.
+- [x] Application accessible sur le port 8080 du Codespace.
+- [x] Compose avec web, Redis, réseau dédié et volume nommé.
+- [x] Healthchecks web et Redis, avec attente de Redis avant le démarrage web.
+- [x] Compteur `/visits` persistant après redémarrage du service web.
+- [x] Publication GHCR avec les tags `v1.0.0` et `latest`.
+- [x] Commandes de construction et d'exécution documentées.

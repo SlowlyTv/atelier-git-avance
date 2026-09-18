@@ -1,3 +1,7 @@
+from unittest.mock import Mock, patch
+
+import redis
+
 from app import alert_threshold, sanitize_input, app
 
 
@@ -24,3 +28,22 @@ def test_status_endpoint():
         "service": "projet-devops-groupe-demo",
         "version": "1.0",
     }
+
+
+def test_visits_endpoint_increments_counter():
+    redis_client = Mock()
+    redis_client.incr.return_value = 7
+    with patch("app.get_redis_client", return_value=redis_client):
+        response = app.test_client().get("/visits")
+    assert response.status_code == 200
+    assert response.get_json() == {"visits": 7}
+    redis_client.incr.assert_called_once_with("visits")
+
+
+def test_visits_endpoint_reports_redis_failure():
+    redis_client = Mock()
+    redis_client.incr.side_effect = redis.RedisError("unavailable")
+    with patch("app.get_redis_client", return_value=redis_client):
+        response = app.test_client().get("/visits")
+    assert response.status_code == 503
+    assert response.get_json() == {"error": "redis unavailable"}
