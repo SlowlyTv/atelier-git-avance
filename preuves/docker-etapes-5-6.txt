@@ -1,0 +1,16 @@
+Atelier 3 - etapes 5 et 6
+Date : 2026-09-18
+
+Validation Compose : docker compose config OK
+Services :
+- web : healthy, port 8080 -> 5000
+- redis : healthy, image redis:7-alpine, volume redis-data
+
+Verification fonctionnelle :
+GET /health  -> {"status":"ok"}
+GET /visits  -> {"visits":1}
+GET /visits  -> {"visits":2}
+Redemarrage du seul service web
+GET /visits  -> {"visits":3}
+
+Conclusion : la resolution par nom de service, les healthchecks, depends_on et la persistance Redis sont valides.

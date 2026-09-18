@@ -1,0 +1,41 @@
+services:
+  web:
+    build:
+      context: .
+    image: atelier-git-avance:compose
+    ports:
+      - "8080:5000"
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+    extra_hosts:
+      - "redis:host-gateway"
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - atelier-network
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - atelier-network
+
+networks:
+  atelier-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.enable_icc: "true"
+
+volumes:
+  redis-data:
