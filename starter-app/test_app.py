@@ -13,6 +13,13 @@ def test_sanitize_input_escapes_html():
     assert sanitize_input("<script>") == "&lt;script&gt;"
 
 
+def test_homepage_is_available():
+    response = app.test_client().get("/")
+    assert response.status_code == 200
+    assert b"Atelier Git avance" in response.data
+    assert b'href="/health"' in response.data
+
+
 def test_health_endpoint_checks_redis():
     redis_client = Mock()
     redis_client.ping.return_value = True
