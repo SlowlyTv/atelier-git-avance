@@ -1,0 +1,24 @@
+Atelier 4 - etape 1 : healthcheck reel
+Date : 2026-09-24
+
+Validation initiale :
+docker compose -f starter-app/docker-compose.yml config
+Resultat : OK
+
+Tests automatises :
+- 7 tests Pytest reussis
+- Flake8 reussi
+
+Test avec Redis demarre :
+HTTP=200
+BODY={"redis":"ok","status":"ok"}
+
+Test avec Redis arrete :
+HTTP=503
+BODY={"dependency":"redis","status":"error"}
+
+Test apres redemarrage de Redis :
+HTTP=200
+BODY={"redis":"ok","status":"ok"}
+
+Etat final : services web et redis healthy.

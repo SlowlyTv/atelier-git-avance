@@ -24,12 +24,18 @@ def get_redis_client():
         host=os.getenv("REDIS_HOST", "redis"),
         port=int(os.getenv("REDIS_PORT", "6379")),
         decode_responses=True,
+        socket_connect_timeout=1,
+        socket_timeout=1,
     )
 
 
 @app.route("/health")
 def health():
-    return jsonify(status="ok"), 200
+    try:
+        get_redis_client().ping()
+    except redis.RedisError:
+        return jsonify(status="error", dependency="redis"), 503
+    return jsonify(status="ok", redis="ok"), 200
 
 
 @app.route("/status")
