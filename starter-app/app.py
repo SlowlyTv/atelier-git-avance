@@ -29,6 +29,49 @@ def get_redis_client():
     )
 
 
+@app.route("/")
+def index():
+    return """<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atelier Git avance</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 760px;
+      margin: 64px auto;
+      padding: 0 24px;
+      background: #10162f;
+      color: #f4f6ff;
+    }
+    main {
+      background: #1a2347;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 16px 50px #070b1c;
+    }
+    h1 { margin-top: 0; color: #91a7ff; }
+    a { color: #8ce99a; }
+    code { background: #0b1025; padding: 3px 7px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Atelier Git avance</h1>
+    <p>L'application Flask fonctionne dans Docker avec Redis.</p>
+    <ul>
+      <li><a href="/health">Verifier la sante de Redis</a></li>
+      <li><a href="/status">Afficher le statut</a></li>
+      <li><a href="/visits">Tester le compteur de visites</a></li>
+    </ul>
+    <p>Service expose par le port <code>8080</code> du Codespace.</p>
+  </main>
+</body>
+</html>"""
+
+
 @app.route("/health")
 def health():
     try:
