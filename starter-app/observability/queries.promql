@@ -1,0 +1,8 @@
+# Compteur brut : valeur cumulative depuis le demarrage du processus.
+http_requests_total
+
+# Debit moyen de requetes par seconde sur la derniere minute.
+rate(http_requests_total[1m])
+
+# Debit regroupe par endpoint.
+sum by (endpoint) (rate(http_requests_total[1m]))
