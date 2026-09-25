@@ -80,9 +80,29 @@ services:
     networks:
       - atelier-network
 
+  grafana:
+    image: grafana/grafana:11.3.0
+    profiles: ["blue"]
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./observability/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./observability/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      prometheus:
+        condition: service_started
+    networks:
+      - atelier-network
+
 networks:
   atelier-network:
     driver: bridge
 
 volumes:
   redis-data:
+  grafana-data:
