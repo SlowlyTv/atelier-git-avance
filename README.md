@@ -104,3 +104,16 @@ docker run --rm -p 8080:5000 ghcr.io/slowlytv/atelier-git-avance:v1.0.0
 - [x] Compteur `/visits` persistant après redémarrage du service web.
 - [x] Publication GHCR avec les tags `v1.0.0` et `latest`.
 - [x] Commandes de construction et d'exécution documentées.
+
+## Pipeline CI/CD blue/green
+
+Le pipeline execute lint, les tests Python, publie l'image Docker avec les tags github.sha et latest, puis lance deploy/deploy.sh dans l'environment GitHub production.
+
+Le deploiement demarre la couleur inactive, attend le vrai endpoint /health, controle deploy_color et commit_sha dans /status, recharge nginx puis arrete l'ancienne couleur. Si un controle echoue, le candidat est supprime et la couleur active ne change pas.
+
+Verification locale :
+
+    cd starter-app
+    docker compose --profile blue up -d --build
+    curl http://localhost:8080/status
+    EXPECTED_SHA=demo ./deploy/deploy.sh
