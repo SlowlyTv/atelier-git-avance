@@ -1,0 +1,9 @@
+Atelier 4 - validations locales
+
+- Tests Python : 8 passes
+- Profil blue : app-blue, nginx et redis demarrent; /status renvoie deploy_color=blue
+- Bascule automatique : blue -> green reussie
+- Smoke test : deploy_color=green et commit_sha=candidate verifies
+- Rollback automatique : un candidat avec commit_sha=wrong attendu=expected est rejete
+- Apres echec : active-color reste green et le trafic reste sur candidate
+- Configuration Compose valide pour les profils blue et green

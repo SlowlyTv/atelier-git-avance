@@ -1,20 +1,40 @@
+x-app-environment: &app-environment
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  COMMIT_SHA: ${DEPLOY_SHA:-development}
+  RELEASE_MESSAGE: ${RELEASE_MESSAGE:-atelier4-ready}
+
+x-app: &app
+  build:
+    context: .
+  image: ${APP_IMAGE:-atelier-git-avance:compose}
+  restart: unless-stopped
+  extra_hosts:
+    - "redis:host-gateway"
+  depends_on:
+    redis:
+      condition: service_healthy
+  networks:
+    - atelier-network
+
 services:
-  web:
-    build:
-      context: .
-    image: atelier-git-avance:compose
+  app-blue:
+    <<: *app
+    profiles: ["blue"]
     ports:
-      - "8080:5000"
+      - "5001:5000"
     environment:
-      REDIS_HOST: redis
-      REDIS_PORT: "6379"
-    extra_hosts:
-      - "redis:host-gateway"
-    depends_on:
-      redis:
-        condition: service_healthy
-    networks:
-      - atelier-network
+      <<: *app-environment
+      DEPLOY_COLOR: blue
+
+  app-green:
+    <<: *app
+    profiles: ["green"]
+    ports:
+      - "5002:5000"
+    environment:
+      <<: *app-environment
+      DEPLOY_COLOR: green
 
   redis:
     image: redis:7-alpine
@@ -31,11 +51,21 @@ services:
     networks:
       - atelier-network
 
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - atelier-network
+
 networks:
   atelier-network:
     driver: bridge
-    driver_opts:
-      com.docker.network.bridge.enable_icc: "true"
 
 volumes:
   redis-data:
