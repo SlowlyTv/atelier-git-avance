@@ -2,7 +2,7 @@ x-app-environment: &app-environment
   REDIS_HOST: redis
   REDIS_PORT: "6379"
   COMMIT_SHA: ${DEPLOY_SHA:-development}
-  RELEASE_MESSAGE: ${RELEASE_MESSAGE:-atelier4-ready}
+  RELEASE_MESSAGE: ${RELEASE_MESSAGE:-atelier4-problematic}
 
 x-app: &app
   build:
