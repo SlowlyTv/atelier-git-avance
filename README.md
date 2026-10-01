@@ -117,3 +117,65 @@ Verification locale :
     docker compose --profile blue up -d --build
     curl http://localhost:8080/status
     EXPECTED_SHA=demo ./deploy/deploy.sh
+
+## Observabilite avec Prometheus et Grafana
+
+L'application expose ses metriques sur `/metrics`. Le compteur
+`http_requests_total` distingue la methode, l'endpoint et le code HTTP. La
+latence est mesuree avec l'histogramme
+`http_request_duration_seconds`. L'endpoint `/metrics` est exclu du compteur
+pour que les scrapes Prometheus ne faussent pas les resultats.
+
+Pour lancer toute la stack en une commande :
+
+```bash
+cd starter-app
+cp .env.example .env
+docker compose --profile blue up -d --build
+```
+
+Services disponibles :
+
+- application : <http://localhost:5001> ;
+- metriques Flask : <http://localhost:5001/metrics> ;
+- Prometheus : <http://localhost:9090> ;
+- cibles Prometheus : <http://localhost:9090/targets> ;
+- regles Prometheus : <http://localhost:9090/rules> ;
+- alertes Prometheus : <http://localhost:9090/alerts> ;
+- Grafana : <http://localhost:3000>.
+
+Grafana utilise l'utilisateur `admin`. Son mot de passe est lu depuis
+`GRAFANA_ADMIN_PASSWORD` dans le fichier `.env`. La datasource Prometheus est
+provisionnee automatiquement avec l'adresse interne
+`http://prometheus:9090`.
+
+Le dashboard **Atelier - Observabilite**, range dans le dossier
+**Atelier DevOps**, est charge automatiquement depuis
+`observability/grafana/dashboards/atelier-observabilite.json`. Il montre :
+
+1. le debit de requetes par endpoint ;
+2. le taux global de reponses HTTP 5xx ;
+3. la latence p95 calculee avec `histogram_quantile()`.
+
+La regle `HighHttpErrorRate` passe en alerte lorsque la proportion de reponses
+5xx depasse **5 % pendant au moins 30 secondes**. Pour la tester, generer du
+trafic normal puis appeler `/simulate-error` de facon soutenue pendant plus de
+30 secondes. Son etat evolue de `inactive` a `pending`, puis `firing`.
+
+Exemple PowerShell :
+
+```powershell
+1..10 | ForEach-Object { curl.exe -s http://localhost:5001/ | Out-Null }
+$fin = (Get-Date).AddSeconds(45)
+while ((Get-Date) -lt $fin) {
+    curl.exe -s http://localhost:5001/simulate-error | Out-Null
+    Start-Sleep -Milliseconds 200
+}
+```
+
+Les exemples PromQL de l'atelier sont conserves dans
+`observability/queries.promql`. Pour arreter et supprimer les conteneurs :
+
+```bash
+docker compose --profile blue down
+```

@@ -1,1 +1,15 @@
-groups: []
+groups:
+  - name: atelier-observabilite
+    rules:
+      - alert: HighHttpErrorRate
+        expr: |
+          sum(rate(http_requests_total{status=~"5.."}[1m]))
+          /
+          clamp_min(sum(rate(http_requests_total[1m])), 0.001)
+          > 0.05
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: Taux d'erreur HTTP superieur a 5 %
+          description: Plus de 5 % des requetes sont en erreur depuis 30 secondes.
